@@ -60,6 +60,10 @@ $ gcloud preview app setup-managed-vms
 
 **ANOTHER**
 
+The issue that was stopping `gcloud` from using the docker daemon was that boot2docker ran it with TLS enabled.
+
+To disable TLS:
+
 ```
 $ boot2docker ssh
 $ sudo vi /var/lib/boot2docker/profile
@@ -74,9 +78,11 @@ export DOCKER_TLS=no
 Then on local machine
 
 ```
-export DOCKER_HOST=tcp://192.168.59.103:2375
-unset DOCKER_CERT_PATH
-unset DOCKER_TLS_VERIFY
+$ boot2docker down
+$ boot2docker up
+$ export DOCKER_HOST=tcp://192.168.59.103:2375
+$ unset DOCKER_CERT_PATH
+$ unset DOCKER_TLS_VERIFY
 ```
 
 Seems like gcloud TLS support is a bit messy...
