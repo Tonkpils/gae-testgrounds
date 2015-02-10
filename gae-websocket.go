@@ -36,7 +36,8 @@ func getHostname() (string, error) {
 func echoHandler(w http.ResponseWriter, r *http.Request) {
 	name, err := getHostname()
 	if err != nil {
-		panic(err)
+		fmt.Fprint(w, err)
+		return
 	}
 	wsInfo := struct {
 		WebSocketURL string
@@ -45,10 +46,12 @@ func echoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	t, err := template.ParseFiles("gae.html")
 	if err != nil {
-		panic(err)
+		fmt.Fprint(w, err)
+		return
 	}
 	if err := t.Execute(w, wsInfo); err != nil {
-		panic(err)
+		fmt.Fprint(w, err)
+		return
 	}
 }
 
