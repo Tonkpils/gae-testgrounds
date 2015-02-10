@@ -5,13 +5,6 @@ Google App Engine Test
 
 ### On OSX
 
-**TODO** Remove this since it's only for running App Engine apps not through managed vms
-
-```
-$ brew install go-app-engine-64
-$ goapp
-```
-
 * Install boot2docker
   * Need docker TLS turned off...
 * Install gcloud utility
