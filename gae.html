@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div id="echo">
+    </div>
+
+    <form id="message">
+      <input type="text" id="message-content"/>
+      <input type="submit"/>
+    </form>
+
+    <script>
+      ws = new WebSocket("{{.WebSocketURL}}");
+      ws.onmessage = function(event) {
+	$("#echo").append("<p>" + event.data + "</p>");
+      };
+
+      ws.onopen = function() {
+	console.log("Connected");
+	ws.send("Hello from " + navigator.userAgent);
+      };
+
+      $("#message").bind("submit", function(event) {
+	event.preventDefault();
+	ws.send($("#message-content").val());
+	$("#message-content").val("");
+      });
+    </script>
+  </body>
+</html>
