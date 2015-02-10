@@ -6,15 +6,14 @@ Google App Engine Test
 ### On OSX
 
 **TODO** Remove this since it's only for running App Engine apps not through managed vms
+
 ```
 $ brew install go-app-engine-64
 $ goapp
 ```
 
-
-* Install Docker
-  * Only version 1.3 works at the moment with gcloud
-    * TODO: Test 1.4 version of docker/boot2docker
+* Install boot2docker
+  * Need docker TLS turned off...
 * Install gcloud utility
   * gcloud components update preview app
 
@@ -66,6 +65,28 @@ Then run again
 $ gcloud preview app setup-managed-vms
 ```
 
+**ANOTHER**
+
+```
+$ boot2docker ssh
+$ sudo vi /var/lib/boot2docker/profile
+```
+
+and insert the following line
+
+```
+export DOCKER_TLS=no
+```
+
+Then on local machine
+
+```
+export DOCKER_HOST=tcp://192.168.59.103:2375
+unset DOCKER_CERT_PATH
+unset DOCKER_TLS_VERIFY
+```
+
+Seems like gcloud TLS support is a bit messy...
 
 ## Running App Locally
 
